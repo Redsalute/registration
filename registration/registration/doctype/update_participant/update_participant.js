@@ -24,6 +24,7 @@ frappe.ui.form.on('Update Participant', {
 			callback:function(r,rt){
 				frm.refresh_field("participant_details");
 				frm.refresh_fields();
+				frappe.msgprint("Participant Updated in Event")
 			}
 		});
 		

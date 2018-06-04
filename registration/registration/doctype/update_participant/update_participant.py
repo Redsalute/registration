@@ -84,8 +84,6 @@ class UpdateParticipant(Document):
 			print("\n\n\n\n\n\n\n\n")
 			print ("hello from items")
 			for j in target_doc.participants:
-				print ("hello i am j")
-				print (j)
 				if j.participant_data:		
 					target_doc.set('participants', [])
 					k = target_doc.append('participants', {})
