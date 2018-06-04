@@ -103,7 +103,7 @@ class UpdateParticipant(Document):
 						},
 					},
 					"Participant details": {
-						"doctype": "Participants",
+						"doctype": "participants",
 						"field_map": {
 							"parent": self.event
 						},
