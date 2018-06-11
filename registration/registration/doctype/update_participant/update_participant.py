@@ -78,7 +78,7 @@ class UpdateParticipant(Document):
 
 
 	def update_participant(self,target_doc):
-		target_doc = frappe.get_doc("Events",self.event)
+		target_doc = frappe.get_doc("Events",self.Events)
 		print (target_doc)
 		for i in self.participant_details:
 			print("\n\n\n\n\n\n\n\n")
@@ -103,7 +103,7 @@ class UpdateParticipant(Document):
 						},
 					},
 					"Participant details": {
-						"doctype": "participants",
+						"doctype": "Participants",
 						"field_map": {
 							"parent": self.event
 						},
