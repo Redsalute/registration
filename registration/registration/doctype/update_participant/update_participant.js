@@ -6,6 +6,17 @@ frappe.ui.form.on('Update Participant', {
 		frm.disable_save();
 	},
 
+	registration_no: function(frm) {
+		return frappe.call({
+			method: "get_particpant_details",
+			doc: frm.doc,
+			callback: function(r, rt) {
+				frm.refresh_field("participant_details");
+				frm.refresh_fields();
+				frappe.msgprint("hii");
+			}
+		});
+	},
 	get_details: function(frm) {
 		return frappe.call({
 			method: "get_particpant_details",
@@ -22,9 +33,9 @@ frappe.ui.form.on('Update Participant', {
 			method:"update_participant",
 			doc:frm.doc,
 			callback:function(r,rt){
-				frm.refresh_field("participant_details");
-				frm.refresh_fields();
-				frappe.msgprint("Participant Updated in Event")
+				// frm.refresh_field("participant_details");
+				// frm.refresh_fields();
+				// frappe.msgprint("Participant Updated in Event")
 			}
 		});
 		

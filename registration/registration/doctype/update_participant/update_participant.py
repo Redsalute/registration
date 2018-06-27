@@ -32,8 +32,8 @@ class UpdateParticipant(Document):
 		for d in self.get('participant_details'):
 			print("dkkkkk",d)
 		now = frappe.utils.now
-		print "\n\n\n\n\n\n"
-		print (now)
+		
+		
 		for d in entries:
 			doc_req = {
 				"doctype": "Event Participant",
@@ -48,65 +48,35 @@ class UpdateParticipant(Document):
 			# row = self.append('user_permission', {})
 			# row.update(d)
 			print(d,"\nl")
-		# entries = sorted(list(query))
-        # self.set('user_permission', [])
 
-   #      for d in entries:
-			# row = self.append('user_permission', {})
-			# d.user = user
-			# d.allow = allow
-			# d.for_value = for_value
-			# row.update(d)
-
-	# def update_user_permissions(self):
-	# 	frappe.msgprint("")
-	# 	for i in self.user_permission:
-	# 		is_existing = frappe.db.get_value("User Permission",{"user":self.for_user,
-	# 			"allow":i.allow,"for_value":i.for_value},"name")
-	# 		if not is_existing:
-	# 			user_perm_doc = frappe.new_doc("User Permission")
-	# 			user_perm_doc.user = self.for_user
-	# 			user_perm_doc.allow = i.allow
-	# 			user_perm_doc.for_value = i.for_value	
-	# 			user_perm_doc.flags.ignore_permissions = True		
-	# 			user_perm_doc.insert()
-	# 			user_perm_doc.save()
-
-	# 	frappe.msgprint("User record added successfuly")
-
-	# 	# frappe.new_doc
 
 
 	def update_participant(self,target_doc):
-		target_doc = frappe.get_doc("Events",self.Events)
+		frappe.msgprint("hi")
+		frappe.msgprint(self.event)
+		target_doc = frappe.get_doc("Events",self.event)
 		print (target_doc)
+
+
+		# print(target_doc.participants[0].participant_data)
 		for i in self.participant_details:
 			print("\n\n\n\n\n\n\n\n")
 			print ("hello from items")
-			for j in target_doc.participants:
-				if j.participant_data:		
-					target_doc.set('participants', [])
-					k = target_doc.append('participants', {})
-					print("\n\n\n\n\n\n\n\n")
-					print (k)
-					print ("hello from world")
-					k.participant_data = i.participant_data
-					k.registration_no = i.registration_no
-					k.chinese_name = i.chinese_name
-					k.indonesian_name = i.indonesian_name
-					k.time_attendance = i.time_attendance
-					doclist = get_mapped_doc("Update Participant", self, {
-					"Update Participant": {
-						"doctype": "Events",
-						"validation": {
-							"docstatus": ["=", 0]
-						},
-					},
-					"Participant details": {
-						"doctype": "Participants",
-						"field_map": {
-							"parent": self.event
-						},
-					},
-				}, target_doc, ignore_permissions=False)
+			print(i.participant_data)
+			myflag = True
+			for k in target_doc.participants:
+				if k.participant_data == i.participant_data:
+					myflag = False
+			if myflag == True:
+				doc_req = {
+					"doctype": "Event Participant",
+					"participant_data": i.participant_data,
+					"time_attendance": i.time_attendance
+				}
+				target_doc.append("participants", doc_req)
+				print(len(target_doc.participants))
 				target_doc.save()
+				frappe.msgprint("Participant Updated in Event")
+			else:
+				frappe.msgprint("card allready punched, thanks for comming")
+			
