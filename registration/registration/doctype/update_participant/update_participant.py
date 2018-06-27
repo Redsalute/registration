@@ -19,8 +19,14 @@ class UpdateParticipant(Document):
 		print entries
 		# self.data1 = "pooja"
 		self.set('participant_details', [])
+
+		
+
 		for d in self.get('participant_details'):
+			print("dkkkkk",d)
 		now = frappe.utils.now
+		
+		
 		for d in entries:
 			doc_req = {
 				"doctype": "Event Participant",
@@ -32,6 +38,10 @@ class UpdateParticipant(Document):
 			
 			}
 			self.append("participant_details", doc_req)
+			# row = self.append('user_permission', {})
+			# row.update(d)
+			print(d,"\nl")
+
 
 
 	def update_participant(self,target_doc):
