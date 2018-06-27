@@ -26,22 +26,23 @@ class UpdateParticipant(Document):
 			print("dkkkkk",d)
 		now = frappe.utils.now
 		
-		
-		for d in entries:
-			doc_req = {
-				"doctype": "Event Participant",
-				"participant_data": d.name,
-				"registration_no": d.registration_no,
-				"chinese_name": d.chinese_name,
-				"indonesian_name": d.indonesian_name,
-				"time_attendance":now()
-			
-			}
-			self.append("participant_details", doc_req)
-			# row = self.append('user_permission', {})
-			# row.update(d)
-			print(d,"\nl")
-
+		if entries:
+			for d in entries:
+				doc_req = {
+					"doctype": "Event Participant",
+					"participant_data": d.name,
+					"registration_no": d.registration_no,
+					"chinese_name": d.chinese_name,
+					"indonesian_name": d.indonesian_name,
+					"time_attendance":now()
+				
+				}
+				self.append("participant_details", doc_req)
+				# row = self.append('user_permission', {})
+				# row.update(d)
+				print(d,"\nl")
+		else:
+			frappe.msgprint("No Record Found")
 
 
 	def update_participant(self,target_doc):
