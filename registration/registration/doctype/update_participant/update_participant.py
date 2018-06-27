@@ -15,25 +15,12 @@ class UpdateParticipant(Document):
 		from `tabParticipant Data` 
 		where 
 		registration_no = '{0}' """.format(self.registraion_no)
-
-		# if self.get_all:
-		# 	pass
-		# else:
-		# 	query += " and allow = 'Account'"
-
 		entries = frappe.db.sql(query, as_dict=1)
 		print entries
 		# self.data1 = "pooja"
 		self.set('participant_details', [])
-
-		#print("\n\n")
-		# return query
-
 		for d in self.get('participant_details'):
-			print("dkkkkk",d)
 		now = frappe.utils.now
-		
-		
 		for d in entries:
 			doc_req = {
 				"doctype": "Event Participant",
@@ -45,19 +32,11 @@ class UpdateParticipant(Document):
 			
 			}
 			self.append("participant_details", doc_req)
-			# row = self.append('user_permission', {})
-			# row.update(d)
-			print(d,"\nl")
-
 
 
 	def update_participant(self,target_doc):
-		frappe.msgprint("hi")
-		frappe.msgprint(self.event)
 		target_doc = frappe.get_doc("Events",self.event)
 		print (target_doc)
-
-
 		# print(target_doc.participants[0].participant_data)
 		for i in self.participant_details:
 			print("\n\n\n\n\n\n\n\n")
@@ -78,5 +57,5 @@ class UpdateParticipant(Document):
 				target_doc.save()
 				frappe.msgprint("Participant Updated in Event")
 			else:
-				frappe.msgprint("card allready punched, thanks for comming")
+				frappe.msgprint("Card allready punched, Thanks for comming")
 			
