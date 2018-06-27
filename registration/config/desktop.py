@@ -14,7 +14,7 @@ def get_data():
 		{
 			"module_name": "Events",
 			"_doctype": "Events",
-			"color": "#b512de",
+			"color": "#12b8de",
 			"icon": "fa fa-calendar-check-o",
 			"type": "link",
 			"link": "List/Events"
